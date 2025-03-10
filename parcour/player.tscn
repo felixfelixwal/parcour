@@ -27,7 +27,7 @@ shape = SubResource("CylinderShape3D_tepmf")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.850682, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.186022, -0.400259)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.391, 0.441, 2.797)
 
 [node name="GroundCheck" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
