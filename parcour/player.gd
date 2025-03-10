@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 var speed = 10
+var sprint_speed = 20  # Increased speed when sprinting
 var h_acceleration = 6
 var air_acceleration = 1
 var normal_acceleration = 6
@@ -14,11 +15,14 @@ var direction = Vector3()
 var h_velocity = Vector3()
 var gravity_vec = Vector3()
 
+var is_sprinting = false  # Track if the player is sprinting
+
 @onready var head = $Head
 @onready var ground_check: RayCast3D = $GroundCheck
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
 func _input(event):
 	if event is InputEventMouseMotion:
 		rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
@@ -56,9 +60,13 @@ func _physics_process(delta):
 	elif Input.is_action_pressed("move_right"):
 		direction += transform.basis.x
 
+	# Sprint input handling
+	is_sprinting = Input.is_action_pressed("sprint") and direction != Vector3.ZERO
+
 	# Normalize direction and apply acceleration
 	direction = direction.normalized()
-	h_velocity = h_velocity.lerp(direction * speed, h_acceleration * delta)
+	var current_speed = sprint_speed if is_sprinting else speed
+	h_velocity = h_velocity.lerp(direction * current_speed, h_acceleration * delta)
 
 	# Set the final velocity (gravity already accounted for in gravity_vec)
 	velocity = Vector3(h_velocity.x, gravity_vec.y, h_velocity.z)
