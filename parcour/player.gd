@@ -31,9 +31,7 @@ func _input(event):
 
 func _physics_process(delta):
 	direction = Vector3()
-	var body_collision = get_last_slide_collision()
-	if body_collision != null:
-		if body_collision.collider is Deat
+
 	# Check if the raycast is colliding
 	full_contact = ground_check.is_colliding()
 
