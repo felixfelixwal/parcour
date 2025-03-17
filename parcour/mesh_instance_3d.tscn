@@ -81,7 +81,7 @@ skeleton = NodePath("../..")
 [node name="Map" type="Node3D" parent="."]
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Map"]
-transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.5, -4.4, 1.12345, -4.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4, 1.1, -4.3)
 mesh = SubResource("CylinderMesh_wmqpa")
 skeleton = NodePath("../..")
 
@@ -91,7 +91,7 @@ skeleton = NodePath("../..")
 shape = SubResource("ConcavePolygonShape3D_dggpd")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Map"]
-transform = Transform3D(1.5, 1.96515e-05, 0.000335013, -2.9715e-05, 1, 0.00106442, -0.000334992, -0.000709621, 1.5, -2.17025, 2.39695, -6.57405)
+transform = Transform3D(1, 1.96468e-05, 0.000223344, -1.981e-05, 1, 0.00070962, -0.000223328, -0.000709621, 1, 1.94548, 2.35117, -8.88805)
 mesh = SubResource("CylinderMesh_wlnqo")
 skeleton = NodePath("../..")
 
