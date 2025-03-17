@@ -19,6 +19,9 @@ var is_sprinting = false  # Track if the player is sprinting
 
 @onready var head = $Head
 @onready var ground_check: RayCast3D = $GroundCheck
+@onready var spawn_point: Marker3D = $"../Map/SpawnPoint"
+
+var fall_threshold: float = -10.0  # Adjust this value based on your map
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -31,6 +34,11 @@ func _input(event):
 
 func _physics_process(delta):
 	direction = Vector3()
+
+	# Check if the player has fallen below the threshold
+	if global_transform.origin.y < fall_threshold:
+		reset_player()
+		return  # Skip the rest of the physics process for this frame
 
 	# Check if the raycast is colliding
 	full_contact = ground_check.is_colliding()
@@ -46,11 +54,11 @@ func _physics_process(delta):
 		gravity_vec = -get_floor_normal()
 		h_acceleration = normal_acceleration
 
-	# Jump input handling
+	# Jump input handling (only allow jumping when on the floor or in full contact)
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or full_contact):
 		gravity_vec = Vector3.UP * jump
 
-	# Movement input handlingdd
+	# Movement input handling
 	if Input.is_action_pressed("move_forward"):
 		direction -= transform.basis.z
 	elif Input.is_action_pressed("move_backward"):
@@ -60,7 +68,7 @@ func _physics_process(delta):
 	elif Input.is_action_pressed("move_right"):
 		direction += transform.basis.x
 
-	# Sprint input handlings
+	# Sprint input handling
 	is_sprinting = Input.is_action_pressed("sprint") and direction != Vector3.ZERO
 
 	# Normalize direction and apply acceleration
@@ -73,3 +81,13 @@ func _physics_process(delta):
 
 	# Use move_and_slide() with no arguments; it automatically uses the velocity
 	move_and_slide()
+
+func reset_player():
+	if spawn_point:
+		# Reset the player's position to the spawn point
+		global_transform.origin = spawn_point.global_transform.origin
+		# Reset velocity and gravity vector
+		velocity = Vector3.ZERO
+		gravity_vec = Vector3.ZERO
+	else:
+		print("Spawn point not assigned!")
