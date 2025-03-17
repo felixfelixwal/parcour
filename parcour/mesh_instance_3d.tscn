@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bs0jpu5pvxlde"]
+[gd_scene load_steps=19 format=3 uid="uid://bs0jpu5pvxlde"]
 
 [ext_resource type="PackedScene" uid="uid://bwshq1gv4h5k6" path="res://player.tscn" id="1_pgtix"]
 
@@ -49,22 +49,6 @@ background_mode = 2
 sky = SubResource("Sky_wtuws")
 tonemap_mode = 2
 glow_enabled = true
-
-[sub_resource type="BoxMesh" id="BoxMesh_p07in"]
-
-[sub_resource type="GDScript" id="GDScript_wbv0h"]
-script/source = "extends StaticBody3D
-
-# This function is called when another body enters the collision area
-func _on_body_entered(body: Node3D):
-	# Check if the body that entered is the player
-	if body.is_in_group(\"Player\"):
-		# Reset the player's position to their origin
-		body.global_transform.origin = body.initial_position
-"
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_oumnt"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
 [node name="Main" type="Node3D"]
 
@@ -273,13 +257,3 @@ environment = SubResource("Environment_7vlgi")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lightning"]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(7.145, 0, 0, 0, 0.26, 0, 0, 0, 6.41, 0, 0.459592, 8.68365)
-mesh = SubResource("BoxMesh_p07in")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
-script = SubResource("GDScript_wbv0h")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_oumnt")
