@@ -60,7 +60,7 @@ func _physics_process(delta):
 	elif Input.is_action_pressed("move_right"):
 		direction += transform.basis.x
 
-	# Sprint input handling
+	# Sprint input handlings
 	is_sprinting = Input.is_action_pressed("sprint") and direction != Vector3.ZERO
 
 	# Normalize direction and apply acceleration
