@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 var speed = 10
-var sprint_speed = 20  # Increased speed when sprintingä
+var sprint_speed = 20  # Increased speed when sprinting
 var h_acceleration = 6
 var air_acceleration = 1
 var normal_acceleration = 6
@@ -50,7 +50,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or full_contact):
 		gravity_vec = Vector3.UP * jump
 
-	# Movement input handling
+	# Movement input handlingdd
 	if Input.is_action_pressed("move_forward"):
 		direction -= transform.basis.z
 	elif Input.is_action_pressed("move_backward"):
