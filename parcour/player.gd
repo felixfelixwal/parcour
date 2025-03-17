@@ -32,7 +32,7 @@ func _input(event):
 func _physics_process(delta):
 	direction = Vector3()
 
-	# Check if the raycast is collidingw
+	# Check if the raycast is colliding
 	full_contact = ground_check.is_colliding()
 
 	# Apply gravity
