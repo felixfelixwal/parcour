@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 var speed = 10
-var sprint_speed = 20  # Increased speed when sprinting
+var sprint_speed = 20  # Increased speed when sprintingä
 var h_acceleration = 6
 var air_acceleration = 1
 var normal_acceleration = 6
