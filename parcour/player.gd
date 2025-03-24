@@ -20,8 +20,14 @@ var is_sprinting = false  # Track if the player is sprinting
 @onready var head = $Head
 @onready var ground_check: RayCast3D = $GroundCheck
 @onready var spawn_point: Marker3D = $"../Map/SpawnPoint"
+@onready var camera: Camera3D = $Head/Camera3D
+  # Assuming you have a Camera3D node as a child
 
 var fall_threshold: float = -10.0  # Adjust this value based on your map
+
+var min_fov = 70  # Minimum FOV (walking)
+var max_fov = 85  # Maximum FOV (sprinting)
+var fov_smooth_speed = 5.0  # Speed at which FOV changes
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -81,6 +87,17 @@ func _physics_process(delta):
 
 	# Use move_and_slide() with no arguments; it automatically uses the velocity
 	move_and_slide()
+
+	# Dynamically adjust FOV based on speed
+	adjust_fov(current_speed)
+
+func adjust_fov(current_speed: float):
+	# Determine the target FOV based on current speed
+	var target_fov = min_fov + ((current_speed - speed) / (sprint_speed - speed)) * (max_fov - min_fov)
+	target_fov = clamp(target_fov, min_fov, max_fov)  # Ensure FOV is within bounds
+
+	# Smoothly transition to the target FOV
+	camera.fov = lerp(camera.fov, target_fov, fov_smooth_speed * get_process_delta_time())
 
 func reset_player():
 	if spawn_point:
