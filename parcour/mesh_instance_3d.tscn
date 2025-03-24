@@ -360,6 +360,16 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Level 2/MeshInstance3D24/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_brq01")
 
+[node name="MeshInstance3D25" type="MeshInstance3D" parent="Map/Level 2"]
+transform = Transform3D(-2.18557e-08, 0, 2, 0, 2, 0, -0.5, 0, -8.74228e-08, -11.3103, 4.77645, -72.8861)
+mesh = SubResource("PrismMesh_jyfjm")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Map/Level 2/MeshInstance3D25"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Level 2/MeshInstance3D25/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_brq01")
+
 [node name="Lightning" type="Node3D" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Lightning"]
