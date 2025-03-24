@@ -23,7 +23,7 @@ var is_sprinting = false  # Track if the player is sprinting
 @onready var camera: Camera3D = $Head/Camera3D
   # Assuming you have a Camera3D node as a child
 
-var fall_threshold: float = -10.0  # Adjust this value based on your map
+var fall_threshold: float = -10.0  # Adjust this value based on your map gasasd
 
 var min_fov = 70  # Minimum FOV (walking)
 var max_fov = 85  # Maximum FOV (sprinting)
