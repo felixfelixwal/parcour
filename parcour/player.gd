@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 var speed = 10
-var sprint_speed = 20  # Increased speed when sprinting
+var sprint_speed = 16  # Increased speed when sprinting
 var h_acceleration = 6
 var air_acceleration = 1
 var normal_acceleration = 6
@@ -26,7 +26,7 @@ var is_sprinting = false  # Track if the player is sprinting
 var fall_threshold: float = -10.0  # Adjust this value based on your map
 
 var min_fov = 70  # Minimum FOV (walking)
-var max_fov = 85  # Maximum FOV (sprinting)
+var max_fov = 90  # Maximum FOV (sprinting)
 var fov_smooth_speed = 5.0  # Speed at which FOV changes
 
 func _ready():
@@ -91,6 +91,7 @@ func _physics_process(delta):
 	# Dynamically adjust FOV based on speed
 	adjust_fov(current_speed)
 
+# Adjust the FOV dynamically based on movement speed
 func adjust_fov(current_speed: float):
 	# Determine the target FOV based on current speed
 	var target_fov = min_fov + ((current_speed - speed) / (sprint_speed - speed)) * (max_fov - min_fov)
@@ -99,6 +100,7 @@ func adjust_fov(current_speed: float):
 	# Smoothly transition to the target FOV
 	camera.fov = lerp(camera.fov, target_fov, fov_smooth_speed * get_process_delta_time())
 
+# Reset player position to spawn point
 func reset_player():
 	if spawn_point:
 		# Reset the player's position to the spawn point
@@ -108,3 +110,4 @@ func reset_player():
 		gravity_vec = Vector3.ZERO
 	else:
 		print("Spawn point not assigned!")
+	
