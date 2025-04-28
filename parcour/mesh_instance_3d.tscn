@@ -285,7 +285,7 @@ skeleton = NodePath("../..")
 shape = SubResource("ConcavePolygonShape3D_jg2gs")
 
 [node name="MeshInstance3D17" type="MeshInstance3D" parent="Map/Level 2"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7.2, 8.19861, -50.089)
+transform = Transform3D(2, 0, 0, 0, 3, 0, 0, 0, 2, 7.2, 8.93785, -50.089)
 mesh = SubResource("BoxMesh_wck1d")
 skeleton = NodePath("../..")
 
