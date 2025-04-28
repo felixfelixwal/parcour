@@ -31,6 +31,7 @@ var fov_smooth_speed = 5.0
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+
 func _input(event):
 	if event is InputEventMouseMotion:
 		rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
@@ -93,4 +94,8 @@ func reset_player():
 		gravity_vec = Vector3.ZERO
 	else:
 		print("Spawn point not assigned!")
+		
+# Neue Funktion zum Setzen eines neuen Spawnpunkts
+func set_spawn_point(new_spawn_point: Node3D):
+	spawn_point = new_spawn_point
 	

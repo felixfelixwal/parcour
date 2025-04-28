@@ -1,6 +1,7 @@
-[gd_scene load_steps=25 format=3 uid="uid://bs0jpu5pvxlde"]
+[gd_scene load_steps=27 format=3 uid="uid://bs0jpu5pvxlde"]
 
 [ext_resource type="PackedScene" uid="uid://bwshq1gv4h5k6" path="res://player.tscn" id="1_pgtix"]
+[ext_resource type="Script" path="res://GameState.gd" id="2_bm17e"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_xeprd"]
 
@@ -52,6 +53,8 @@ size = Vector3(1, 1.04932, 1)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_brq01"]
 data = PackedVector3Array(0, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0, 0.5, 0.5, 0, 0.5, -0.5, 0.5, -0.5, 0.5, 0, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, -0.5, -0.5, -0.5, 0, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_dkugi"]
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vnj0e"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -78,7 +81,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_n4ekr")
 shape = SubResource("ConcavePolygonShape3D_id4wl")
 
 [node name="Player" parent="." instance=ExtResource("1_pgtix")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.14534, 5.83362, -56.4737)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.23726, 10.4343, -43.7673)
 
 [node name="Pfeil" type="Node3D" parent="."]
 
@@ -370,6 +373,18 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Level 2/MeshInstance3D25/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_brq01")
 
+[node name="Area3D" type="Area3D" parent="Map" node_paths=PackedStringArray("checkpoint_position")]
+transform = Transform3D(0.997452, 0, -0.0713408, 0, 1, 0, 0.0713408, 0, 0.997452, 7.23642, 4.11587, -50.324)
+script = ExtResource("2_bm17e")
+checkpoint_position = NodePath("../Marker3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Area3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.206785, 0)
+shape = SubResource("BoxShape3D_dkugi")
+
+[node name="Marker3D" type="Marker3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.37885, 4.35991, -54.4274)
+
 [node name="Lightning" type="Node3D" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Lightning"]
@@ -378,3 +393,5 @@ environment = SubResource("Environment_7vlgi")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lightning"]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
+
+[connection signal="body_entered" from="Map/Area3D" to="Map/Area3D" method="_on_body_entered"]
